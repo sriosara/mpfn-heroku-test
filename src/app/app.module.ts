@@ -18,6 +18,7 @@ import { ReportesavComponent } from './reportesav/reportesav.component';
 import { InventariomaterialComponent } from './inventariomaterial/inventariomaterial.component';
 import { InventarioavComponent } from './inventarioav/inventarioav.component';
 import { LoginComponent } from './login/login.component';
+import { ServiciosComponent } from './servicios/servicios.component';
 
 
 
@@ -50,7 +51,8 @@ const appRoutes: Routes = [
     ReportesavComponent,
     InventariomaterialComponent,
     InventarioavComponent,
-    LoginComponent    
+    LoginComponent,
+    ServiciosComponent    
   ],
   imports: [
     BrowserModule,
