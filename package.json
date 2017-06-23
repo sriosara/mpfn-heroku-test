@@ -28,8 +28,8 @@
     "zone.js": "^0.8.4",
 	  "@angular/cli": "1.0.4",
     "@angular/compiler-cli": "^4.0.0",
-    "bootstrap": "3.3.7",
-    "jquery": "3.2.1"
+    "bootstrap-loader": "2.1.0",
+    "jquery-loader": "2.1.1"
   },
   "devDependencies": {
     "@types/jasmine": "2.5.38",
