@@ -1,3 +1,62 @@
-<h1>
-  {{title}}
-</h1>
+<!DOCTYPE html>
+
+<html>
+  <head></head>
+  <body>
+  <nav class="navbar navbar-inverse">
+      <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+          <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button> -->
+          <a class="navbar-brand" href="#">Ministerio Público</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <ul class="nav navbar-nav">
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestión Bienes Incautados<span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a routerLink="/internarbien" routerLinkActive="active">Internar Bien <span class="sr-only">(current)</span></a></li>
+                <li><a routerLink="/registrarsalidabien" routerLinkActive="active">Registrar Salida</a></li>
+                <li><a routerLink="/registrarretornobien" routerLinkActive="active">Registrar Retorno</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a routerLink="/reportesbi" routerLinkActive="active">Generar Reporte de Bien Incautado</a></li>
+                <li><a href="#">Inventario Materiales</a></li>
+              </ul>
+            </li>
+            
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestión Audio y Video <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a routerLink="/transcripcionaudiovideo">Transcripción AV</a></li>
+                <li><a routerLink="/registraractaentrega">Registrar Acta de Entrega</a></li>
+                <li><a routerLink="/registrardevolucion">Registrar Devolución</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a routerLink="/reportesav">Generar Reporte de Audio y Video</a></li>
+                <li><a routerLink="/inventariomaterial">Inventario Materiales Audio Visuales</a></li>
+                <li><a routerLink="/inventarioav">Inventario Materiales AV</a></li>                
+              </ul>
+            </li>
+          </ul>
+          <!--  class="navbar-img navbar-right"-->
+          <!-- <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p> -->
+          <div class="nav navbar-right">
+            <img class="navbar-right" src="/assets/img/img3.png" style="width: auto; height: 35px; margin-top: 5px; margin-left: 5px; margin-right: 1px" >
+            <p class="navbar-text navbar-right">Bienvenid@ {{usuarioSesion}} </p> 
+
+          </div>          
+          
+          
+        </div><!-- /.navbar-collapse -->
+      </div><!-- /.container-fluid -->
+    </nav>
+  <router-outlet></router-outlet>
+  </body>
+</html>
+

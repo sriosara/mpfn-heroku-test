@@ -1,0 +1,986 @@
+<!-- Codigo de Jaime -->
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+          <img src="/assets/img/logo.png" style="width: auto; height: 150px">
+        </div>
+        <div class="col-md-10">
+          <h1><p class="text-center">BOLETA DE INTERNAMIENTO</p></h1>
+        </div>
+      </div>
+    </div>
+
+    <br><br><br>
+    <div class="container">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">INFORMACIÓN:</h3>
+        </div>
+        <div class="panel-body">
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Fiscalía</span>
+                <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #fiscalia value="{{selectedFiscalia.codigo}}" readonly>
+                <!-- <span class="input-group-addon" data-toggle="modal" data-target="#modalBuscarFiscalia"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </span> -->
+                <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarFiscalia">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Carpeta Fiscal</span>
+                <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #carpetaFiscal value="{{selectedCarpetaFiscal.codigo}}" readonly>
+                <!-- <span class="input-group-addon" data-toggle="modal" data-target="#modalBuscarCarpetaFiscal"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </span> -->
+                <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarCarpetaFiscal">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Despacho</span>
+                <!--deberia jalar despachos de una fiscalia en BD y mostrarlos en un select-->
+                <!--<input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2" id="despacho" disabled>-->
+                <select #despacho class="form-control" title="Seleccione un despacho">
+                  <option *ngFor="let despacho of selectedFiscalia.despachos">{{despacho}}</option>
+                </select>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Autorizado por</span>
+                <input type="text" class="form-control" placeholder="Fiscal" aria-label="Amount (to the nearest dollar)" #autorizadoPor value="{{selectedFiscal.nombre}}" readonly>
+                <!-- <span class="input-group-addon" data-toggle="modal" data-target="#modalBuscarFiscal"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </span> -->
+                <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarFiscal">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Fecha y Hora de Ingreso al Almacen</span>
+                <!--podría ser input de fecha y hora-->
+                <input type="datetime-local" #fechaHora name="input" ng-model="example.value" placeholder="yyy-MM-ddTHH" min="2001-01-01" class="form-control" aria-describedby="sizing-addon2" />
+              </div>
+            </div>
+                        
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Cargo</span>
+                <!--Debería llenarse automaticamente luego de seleccionar un fiscal-->
+                <input type="text" class="form-control" placeholder="Cargo de Fiscal" aria-describedby="sizing-addon2" #cargoAutorizadoPor value={{selectedFiscal.cargo}} readonly> <!--  -->
+              </div>
+            </div>
+          </div>
+          <br>
+
+          <div class="row">
+            <div class="col-md-8">
+              <div class="input-group">
+                <span class="input-group-addon">Documento que autoriza Ingreso</span>
+                <input type="text" class="form-control" placeholder="Oficio" aria-label="Amount (to the nearest dollar)" #oficio value="{{selectedOficio.codigo}}" readonly>
+                <!-- <span class="input-group-addon" data-toggle="modal" data-target="#modalBuscarOficio"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </span> -->
+                <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarOficio">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+            <!--las siguientes columnas del grid no se usaran-->
+          </div>
+          <br> 
+
+
+          <!--.........TABLA DE DELITOS.........-->
+
+          <table class="table table-hover table-bordered table-condensed">
+            <thead>
+            <tr>
+              <th *ngFor="let delito of delitos">{{delito}}</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let fdelit of delit">
+              <td *ngFor="let cdelit of fdelit">{{cdelit}}</td>
+              <td align="center"><button (click)="borrarDelito(fdelit)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button></td>
+            </tr>
+            <tr>
+              <td>
+                <div class="input-group">
+                <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #delitoGen value="{{selectedDelito.codigoDelitoGen}}" readonly>
+                <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarDelitoGenerico">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+              </div>
+              </td>
+              <td>
+                <select #delitoSub class="form-control" title="Seleccione un delito">
+                  <option *ngFor="let delitoSub of selectedDelito.delitoSubgenerico">{{delitoSub}}</option>
+                </select>
+              </td>
+              <td>
+                <select #delitoEsp class="form-control" title="Seleccione un delito">
+                  <option *ngFor="let delitoEsp of selectedDelitoSub.delitoEspecifico">{{delitoEsp}}</option>
+                </select>
+              </td>
+              <td>
+                <button type="button" class="btn btn-success btn-sm" (click)="insertarDelito(delitoGen.value, delitoSub.value, delitoEsp.value)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="borrarUltimoDelito()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <br>
+
+          <!--.........TABLA DE AGRAVIADOS.........-->
+          <table class="table table-hover table-bordered table-condensed">
+            <thead>
+            <tr>
+              <th *ngFor="let agraviado of agraviados">{{agraviado}}</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let fagrav of agrav">
+              <td *ngFor="let cagrav of fagrav">{{cagrav}}</td>
+              <td align="center"><button (click)="borrarAgraviado(fagrav)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button></td>
+            </tr>
+            <tr>
+            <td>
+                <input #nomAgraviado class="form-control">
+              </td>
+              <td>
+                <input #dniAgraviado class="form-control" maxlength="8" size="1" >
+              </td>
+              <td>
+                <input #edadAgraviado class="form-control" maxlength="2" size="1">
+              </td>
+              <td>
+                <button type="button" class="btn btn-success btn-sm" (click)="insertarAgraviado(nomAgraviado.value, dniAgraviado.value, edadAgraviado.value)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="borrarUltimoAgraviado()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+          <br>
+         
+         <!--.........TABLA DE PRESUNTO AUTOR.........-->
+          <table class="table table-hover table-bordered table-condensed">
+            <thead>
+            <tr>
+              <th *ngFor="let autor of autores">{{autor}}</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let faut of aut">
+              <td *ngFor="let caut of faut">{{caut}}</td>
+              <td align="center"><button (click)="borrarAutor(faut)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button></td>
+            </tr>
+            <tr>
+            <td>
+                <input #entrada1 class="form-control" maxlength="2" size="1">
+              </td>
+              <td>
+                <input #entrada2 class="form-control" maxlength="2" size="1">
+              </td>
+              <td>
+                <input #entrada3 class="form-control" size="6">
+              </td>
+              <td>
+                <button type="button" class="btn btn-success btn-sm" (click)="insertarPreAutor(entrada1.value, entrada2.value, entrada3.value, entrada4.value, entrada5.value, entrada6.value)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="borrarUltimoAutor()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+          <!-- PARA MOSTRAR DATOS RESGISTRADOS AL MOMENTO <p>datos serial: {{datosSerializados}}</p> -->
+        </div>
+      </div> <!-- div del panel -->
+
+      <div class="panel panel-default"> <!-- PANEL DE LA TABLA -->
+        <div class="panel-heading">
+          <h3 class="panel-title">DETALLE DE BIENES O ELEMENTOS A INTERNAR:</h3>
+        </div>
+        <div class="panel-body">
+        </div> 
+          <table class="table table-hover table-bordered table-condensed">
+            <thead>
+            <tr>
+              <th *ngFor="let columna of columnas">{{columna}}</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let fila of filas">
+              <td *ngFor="let celda of fila">{{celda}}</td>
+              <td align="center"><button (click)="borrarFila(fila)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button></td>
+            </tr>
+            <tr>
+              <td>
+                <input #entrada1 class="form-control" maxlength="2" size="1">
+              </td>
+              <td>
+                <input #entrada2 class="form-control" maxlength="2" size="1">
+              </td>
+              <td>
+                <input #entrada3 class="form-control" size="6">
+              </td>
+              <td>
+                <textarea #entrada4 class="form-control" rows="1"></textarea>
+              </td>
+              <td>
+                <select #entrada5 class="form-control">
+                <option *ngFor="let estado of estados">{{estado}}</option></select>
+              </td>
+              <td>
+                <input #entrada6 class="form-control" size="5">
+              </td>
+              <td>
+                <button type="button" class="btn btn-success btn-sm" (click)="insertarFila(entrada1.value, entrada2.value, entrada3.value, entrada4.value, entrada5.value, entrada6.value)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="borrarUltimaFila()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+
+      </div>   <!-- del panel de la tabla -->   
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">OBSERVACIONES:</h3>
+        </div>
+        <div class="panel-body">
+          <textarea class="form-control" rows="3" #observaciones></textarea>
+        </div>
+      </div> <!-- del Panel Observaciones --> 
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">ENTREGADO POR Y RECIBIDO POR: </h3>
+        </div>
+        <div class="panel-body">
+
+          <div class="row">
+            <div class="col-md-5 ">
+              <div class="input-group">
+                <span class="input-group-addon">Entregado por</span>
+                <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #entregadoPor value="{{selectedTrabajadorEntregado.nombre}}" readonly>
+                <!-- <span class="input-group-addon" data-toggle="modal" data-target="#modalEntregadoPor"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </span> -->
+                <div class="input-group-btn" data-toggle="modal" data-target="#modalEntregadoPor">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+              </div> <br>
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon6">Cargo</span>
+                <!--Debería llenarse automaticamente luego de seleccionar un trabajador-->
+                <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2" #cargoEntregadoPor value="{{selectedTrabajadorEntregado.cargo}}" readonly>
+              </div> <br>
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon6">DNI</span>
+                <!--Debería llenarse automaticamente luego de seleccionar un fiscal-->
+                <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2" #dniEntregadoPor value="{{selectedTrabajadorEntregado.dni}}" readonly>
+              </div>
+            </div>
+
+            <div class="col-md-5 col-md-offset-2">
+              <div class="input-group">
+                <span class="input-group-addon">Recibido por</span>
+                <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #recibidoPor value="{{selectedTrabajadorRecibido.nombre}}" readonly>
+                <!-- <span class="input-group-addon" data-toggle="modal" data-target="#modalRecibidoPor"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </span> -->
+                <div class="input-group-btn" data-toggle="modal" data-target="#modalRecibidoPor">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+              </div> <br>
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon6">Cargo</span>
+                <!--Debería llenarse automaticamente luego de seleccionar un trabajador-->
+                <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2" #cargoRecibidoPor value="{{selectedTrabajadorRecibido.cargo}}" readonly>
+              </div> <br>
+              <div class="input-group">
+                <span class="input-group-addon" id="sizing-addon6">DNI</span>
+                <!--Debería llenarse automaticamente luego de seleccionar un fiscal-->
+                <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2" #dniRecibidoPor value="{{selectedTrabajadorRecibido.dni}}" readonly>
+              </div>
+            </div>
+          </div>
+          
+        
+        </div>
+      </div> <!-- del panel Entregado por y Recibido por -->
+
+
+
+      <br><br>
+      <p>datos serial: {{datosSerializados}}</p>
+      <div class="row">
+        <div class="col-md-1 col-md-offset-5">
+          <button type="button" class="btn btn-primary btn-lg" (click)="insertarDatos(fiscalia.value, despacho.value, delito.value, presuntoAutor.value, agraviados.value, fechaHora.value, oficio.value, carpetaFiscal.value, autorizadoPor.value, cargoAutorizadoPor.value, observaciones.value, entregadoPor.value, cargoEntregadoPor.value, dniEntregadoPor.value, recibidoPor.value, cargoRecibidoPor.value, dniRecibidoPor.value)">Enviar</button>
+        </div>
+
+        <div class="col-md-1">
+          <button type="button" class="btn btn-default btn-lg">Cancelar</button>
+        </div>
+      </div>
+      <br><br>
+    </div><!--container-->
+
+
+
+
+
+
+
+
+<!-- ....................................................MODALS......................................................... -->
+<!-- ................................................................................................................... -->
+
+
+<!-- Modal Fiscalia-->
+<div class="modal fade" id="modalBuscarFiscalia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Fiscalía</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterio de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="input-group">
+              <span class="input-group-addon">Fiscalía</span>
+              <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #fiscaliaBuscar>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione una Fiscalía:</p>
+          </div>
+          <div class="table-responsive">
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>
+                  Codigo
+                </th>
+                <th>
+                  Descripcion
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let fiscalia of fiscalias; let i = index" (click)="setClickedRowFiscalia(i)" [class.active]="i == selectedRowFiscalia" (click)="setDataFiscalia(fiscalia)">
+                <td>
+                  {{fiscalia.codigo}}
+                </td>
+                <td>
+                  {{fiscalia.descripcion}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedFiscalia()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+<!-- Modal Carpeta Fiscal-->
+<div class="modal fade" id="modalBuscarCarpetaFiscal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Carpeta Fiscal</h4>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterios de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="input-group">
+              <span class="input-group-addon">Carpeta Fiscal</span>
+              <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #carpetaFiscalBuscarNombre>
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon">Delito</span>
+              <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #carpetaFiscalBuscarDelito>
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon">Estado de Proceso</span>
+              <input type="text" class="form-control" placeholder="- En bd puede tener en qué estado de proceso está" aria-label="Amount (to the nearest dollar)" #carpetaFiscalBuscarDelito>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione una Carpeta Fiscal</p>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    Codigo
+                  </th>
+                  <th>
+                    Descripcion
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let carpetaFiscal of carpetasFiscales; let i = index" (click)="setClickedRowCarpetaFiscal(i)" [class.active]="i == selectedRowCarpetaFiscal" (click)="setDataCarpetaFiscal(carpetaFiscal)">
+                  <td>
+                    {{carpetaFiscal.codigo}}
+                  </td>
+                  <td>
+                    {{carpetaFiscal.descripcion}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedCarpetaFiscal()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal Fiscal-->
+<div class="modal fade" id="modalBuscarFiscal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Fiscal</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterios de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">DNI</span>
+                  <input type="text" class="form-control" placeholder="DNI de Fiscal" aria-label="Amount (to the nearest dollar)" #autorizadoPorBuscarDNI>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Nombre</span>
+                  <input type="text" class="form-control" placeholder="Nombre de Fiscal" aria-label="Amount (to the nearest dollar)" #autorizadoPorBuscarNombre>
+                </div>                
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Apellido</span>
+                  <input type="text" class="form-control" placeholder="Apellido de Fiscal" aria-label="Amount (to the nearest dollar)" #autorizadoPorBuscarApellido>
+                </div>                
+              </div>
+            </div><br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione un Fiscal:</p>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    Apellidos y Nombres
+                  </th>
+                  <th>
+                    Cargo
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let fiscal of fiscales; let i = index" (click)="setClickedRowFiscal(i)" [class.active]="i == selectedRowFiscal" (click)="setDataFiscal(fiscal)">
+                  <td>
+                    {{fiscal.nombre}}
+                  </td>
+                  <td>
+                    {{fiscal.cargo}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div> <!-- del div tabla -->
+        </div> <!-- del panel Resultados -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedFiscal()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal Oficio-->
+<div class="modal fade" id="modalBuscarOficio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Oficio</h4>
+      </div>
+      <div class="modal-body">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterios de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Número</span>
+                  <input type="text" class="form-control" placeholder="Número Correlativo del Oficio" aria-label="Amount (to the nearest dollar)" #oficioBuscarNumero>
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Año</span>
+                  <input type="text" class="form-control" placeholder="Año que se generó el Oficio" aria-label="Amount (to the nearest dollar)" #oficioBuscarAnho>
+                </div>                
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Fiscalia</span>
+                  <input type="text" class="form-control" placeholder="Fiscalía de donde proviene el Oficio" aria-label="Amount (to the nearest dollar)" #oficioBuscarFiscalia>
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Despacho</span>
+                  <input type="text" class="form-control" placeholder="Despacho de donde proviene el Oficio" aria-label="Amount (to the nearest dollar)" #oficioBuscarDespacho>
+                </div>                
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione un Oficio: </p>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    Codigo
+                  </th>
+                  <th>
+                    Descripcion
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let oficio of oficios; let i = index" (click)="setClickedRowOficio(i)" [class.active]="i == selectedRowOficio" (click)="setDataOficio(oficio)">
+                  <td>
+                    {{oficio.codigo}}
+                  </td>
+                  <td>
+                    {{oficio.descripcion}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedOficio()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal Entregado por-->
+<div class="modal fade" id="modalEntregadoPor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Trabajador</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterios de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">DNI</span>
+                  <input type="text" class="form-control" placeholder="DNI del Trabajador" aria-label="Amount (to the nearest dollar)" #entregadoPorBuscarDNI>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Nombre</span>
+                  <input type="text" class="form-control" placeholder="Nombre del Trabajador" aria-label="Amount (to the nearest dollar)" #entregadoPorBuscarNombre>
+                </div>                
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Apellido</span>
+                  <input type="text" class="form-control" placeholder="Apellido del Trabajador" aria-label="Amount (to the nearest dollar)" #entregadoPorBuscarApellido>
+                </div>                
+              </div>
+            </div><br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div> <!-- Panel de criterios-->
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+          <p>Seleccione un Trabajador</p>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    DNI
+                  </th>
+                  <th>
+                    Nombre
+                  </th>
+                  <th>
+                    Cargo
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let trabajador of trabajadores; let i = index" (click)="setClickedRowTrabajadorEntregado(i)" [class.active]="i == selectedRowTrabajadorEntregado" (click)="setDataTrabajadorEntregado(trabajador)">
+                  <td>
+                    {{trabajador.dni}}
+                  </td>
+                  <td>
+                    {{trabajador.nombre}}
+                  </td>
+                  <td>
+                    {{trabajador.cargo}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedTrabajadorEntregado()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<!-- Modal Recibido por-->
+<div class="modal fade" id="modalRecibidoPor" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Trabajador</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterios de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">DNI</span>
+                  <input type="text" class="form-control" placeholder="DNI del Trabajador" aria-label="Amount (to the nearest dollar)" #recibidoPorBuscarDNI>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Nombre</span>
+                  <input type="text" class="form-control" placeholder="Nombre del Trabajador" aria-label="Amount (to the nearest dollar)" #recibidoPorBuscarNombre>
+                </div>                
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Apellido</span>
+                  <input type="text" class="form-control" placeholder="Apellido del Trabajador" aria-label="Amount (to the nearest dollar)" #recibidoPorBuscarApellido>
+                </div>                
+              </div>
+            </div><br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div> <!-- Panel de criterios-->
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione un Trabajador: </p>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    Nombre
+                  </th>
+                  <th>
+                    Cargo
+                  </th>
+                  <th>
+                    DNI
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let trabajador of trabajadores; let i = index" (click)="setClickedRowTrabajadorRecibido(i)" [class.active]="i == selectedRowTrabajadorRecibido" (click)="setDataTrabajadorRecibido(trabajador)">
+                  <td>
+                    {{trabajador.nombre}}
+                  </td>
+                  <td>
+                    {{trabajador.cargo}}
+                  </td>
+                  <td>
+                    {{trabajador.dni}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <br><p>selected data {{selectedTrabajadorRecibido.codigo}}, {{selectedTrabajadorRecibido.nombre}}</p>
+          </div>
+        </div> <!-- Panel de Resultado-->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedTrabajadorRecibido()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- Modal Delitos-->
+<div class="modal fade" id="modalBuscarDelitoGenerico" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Delito Generico</h4>
+      </div>
+      <div class="modal-body">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterio de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="input-group">
+              <span class="input-group-addon">Delito Generico</span>
+              <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #fiscaliaBuscar>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione un Delito Generico:</p>
+          </div>
+          <div class="table-responsive">
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>
+                  Codigo
+                </th>
+                <th>
+                  Descripcion de Delito
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let delito of delitoGenerico; let i = index" (click)="setClickedRowDelito(i)" [class.active]="i == selectedRowDelito" (click)="setDataDelito(delito)">
+                <td>
+                  {{delito.codigoDelitoGen}}
+                </td>
+                <td>
+                  {{delito.descripcionDelitoGen}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedDelito()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
