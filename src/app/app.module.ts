@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 //import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
-import { HomeComponent } from './home/home.component';
+//import { HomeComponent } from './home/home.component';
 import { InternarbienComponent } from './internarbien/internarbien.component';
 import { RegistrarsalidabienComponent } from './registrarsalidabien/registrarsalidabien.component';
 import { RegistrarretornobienComponent } from './registrarretornobien/registrarretornobien.component';
@@ -24,7 +24,7 @@ import { ServiciosComponent } from './servicios/servicios.component';
 
 
 const appRoutes: Routes = [
-  { path: 'home', component: HomeComponent },
+  //{ path: 'home', component: HomeComponent },
   { path: 'internarbien', component: InternarbienComponent },
   { path: 'registrarsalidabien', component: RegistrarsalidabienComponent },
   { path: 'registrarretornobien', component: RegistrarretornobienComponent },
@@ -40,7 +40,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
+    //HomeComponent,
     InternarbienComponent,
     RegistrarsalidabienComponent,
     RegistrarretornobienComponent,
