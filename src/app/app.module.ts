@@ -40,7 +40,7 @@ const appRoutes: Routes = [
 @NgModule({
   declarations: [
     AppComponent,
-    //HomeComponent,
+    HomeComponent,
     InternarbienComponent,
     RegistrarsalidabienComponent,
     RegistrarretornobienComponent,
