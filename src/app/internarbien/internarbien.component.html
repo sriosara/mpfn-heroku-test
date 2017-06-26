@@ -3,10 +3,10 @@
     <br>
     <div class="container">
       <div class="row">
-        <div class="col-md-2">
+        <div class="col-md-2 col-xs-2">
           <img src="/assets/img/logo.png" style="width: auto; height: 150px">
         </div>
-        <div class="col-md-10">
+        <div class="col-md-10 col-xs-10">
           <h1><p class="text-center">BOLETA DE INTERNAMIENTO</p></h1>
         </div>
       </div>
@@ -22,7 +22,7 @@
         <div class="panel-body">
 
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6">
               <div class="input-group">
                 <span class="input-group-addon">Fiscalía</span>
                 <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #fiscalia value="{{selectedFiscalia.codigo}}" readonly>
@@ -34,7 +34,7 @@
               </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6">
               <div class="input-group">
                 <span class="input-group-addon">Carpeta Fiscal</span>
                 <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #carpetaFiscal value="{{selectedCarpetaFiscal.codigo}}" readonly>
@@ -48,7 +48,7 @@
           </div>
           <br>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6">
               <div class="input-group">
                 <span class="input-group-addon">Despacho</span>
                 <!--deberia jalar despachos de una fiscalia en BD y mostrarlos en un select-->
@@ -59,7 +59,7 @@
               </div>
             </div>
 
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6">
               <div class="input-group">
                 <span class="input-group-addon">Autorizado por</span>
                 <input type="text" class="form-control" placeholder="Fiscal" aria-label="Amount (to the nearest dollar)" #autorizadoPor value="{{selectedFiscal.nombre}}" readonly>
@@ -73,7 +73,7 @@
           </div>
           <br>
           <div class="row">
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6">
               <div class="input-group">
                 <span class="input-group-addon">Fecha y Hora de Ingreso al Almacen</span>
                 <!--podría ser input de fecha y hora-->
@@ -81,7 +81,7 @@
               </div>
             </div>
                         
-            <div class="col-md-6">
+            <div class="col-md-6 col-xs-6">
               <div class="input-group">
                 <span class="input-group-addon">Cargo</span>
                 <!--Debería llenarse automaticamente luego de seleccionar un fiscal-->
@@ -92,7 +92,7 @@
           <br>
 
           <div class="row">
-            <div class="col-md-8">
+            <div class="col-md-8 col-xs-8">  
               <div class="input-group">
                 <span class="input-group-addon">Documento que autoriza Ingreso</span>
                 <input type="text" class="form-control" placeholder="Oficio" aria-label="Amount (to the nearest dollar)" #oficio value="{{selectedOficio.codigo}}" readonly>
@@ -110,7 +110,7 @@
 
           <!--.........TABLA DE DELITOS.........-->
 
-          <table class="table table-hover table-bordered table-condensed">
+          <table class="table table-responsive table-hover table-bordered table-condensed">
             <thead>
             <tr>
               <th *ngFor="let delito of delitos">{{delito}}</th>
@@ -151,7 +151,7 @@
           <br>
 
           <!--.........TABLA DE AGRAVIADOS.........-->
-          <table class="table table-hover table-bordered table-condensed">
+          <table class="table table-responsive table-hover table-bordered table-condensed">
             <thead>
             <tr>
               <th *ngFor="let agraviado of agraviados">{{agraviado}}</th>
@@ -183,7 +183,7 @@
           <br>
          
          <!--.........TABLA DE PRESUNTO AUTOR.........-->
-          <table class="table table-hover table-bordered table-condensed">
+          <table class="table table-responsive table-hover table-bordered table-condensed">
             <thead>
             <tr>
               <th *ngFor="let autor of autores">{{autor}}</th>
@@ -223,7 +223,7 @@
         </div>
         <div class="panel-body">
         </div> 
-          <table class="table table-hover table-bordered table-condensed">
+          <table class="table table-responsive table-hover table-bordered table-condensed">
             <thead>
             <tr>
               <th *ngFor="let columna of columnas">{{columna}}</th>
@@ -281,7 +281,7 @@
         <div class="panel-body">
 
           <div class="row">
-            <div class="col-md-5 ">
+            <div class="col-md-5 col-xs-5">
               <div class="input-group">
                 <span class="input-group-addon">Entregado por</span>
                 <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #entregadoPor value="{{selectedTrabajadorEntregado.nombre}}" readonly>
@@ -302,8 +302,9 @@
                 <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2" #dniEntregadoPor value="{{selectedTrabajadorEntregado.dni}}" readonly>
               </div>
             </div>
+            
 
-            <div class="col-md-5 col-md-offset-2">
+            <div class="col-md-5 col-md-offset-2 col-xs-5">
               <div class="input-group">
                 <span class="input-group-addon">Recibido por</span>
                 <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #recibidoPor value="{{selectedTrabajadorRecibido.nombre}}" readonly>
@@ -335,11 +336,11 @@
       <br><br>
       <p>datos serial: {{datosSerializados}}</p>
       <div class="row">
-        <div class="col-md-1 col-md-offset-5">
+        <div class="col-md-1 col-md-offset-5 col-xs-5">
           <button type="button" class="btn btn-primary btn-lg" (click)="insertarDatos(fiscalia.value, despacho.value, delito.value, presuntoAutor.value, agraviados.value, fechaHora.value, oficio.value, carpetaFiscal.value, autorizadoPor.value, cargoAutorizadoPor.value, observaciones.value, entregadoPor.value, cargoEntregadoPor.value, dniEntregadoPor.value, recibidoPor.value, cargoRecibidoPor.value, dniRecibidoPor.value)">Enviar</button>
         </div>
 
-        <div class="col-md-1">
+        <div class="col-md-1 col-xs-1">
           <button type="button" class="btn btn-default btn-lg">Cancelar</button>
         </div>
       </div>
