@@ -1,4 +1,4 @@
-import { CarpetaFiscal } from './CarpetaFiscal';
+/*import { CarpetaFiscal } from './CarpetaFiscal';
 //luego se jalara de BD y no se usara este archivo
 export const CarpetasFiscales: CarpetaFiscal[] = [
   { idCarpetaFiscal: 1, descCarpetaFiscal: 'Primera Carpeta Fiscal' },
@@ -11,4 +11,4 @@ export const CarpetasFiscales: CarpetaFiscal[] = [
   { idCarpetaFiscal: 8, descCarpetaFiscal: 'Octava Carpeta Fiscal' },
   { idCarpetaFiscal: 9, descCarpetaFiscal: 'Novena Carpeta Fiscal' },
   { idCarpetaFiscal: 10, descCarpetaFiscal: 'Decima Carpeta Fiscal' }
-];
+];*/
