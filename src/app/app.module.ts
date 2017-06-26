@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
 //import { ChartsModule } from 'ng2-charts';
+import {AlertModule} from 'ngx-bootstrap'
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -58,7 +59,8 @@ const appRoutes: Routes = [
     BrowserModule,
     FormsModule,
     HttpModule,
-    RouterModule.forRoot(appRoutes)
+    RouterModule.forRoot(appRoutes),
+    AlertModule.forRoot()
     //ChartsModule
   ],
   providers: [],
