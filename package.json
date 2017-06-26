@@ -10,7 +10,7 @@
     "lint": "ng lint",
     "e2e": "ng e2e",
     "postinstall": "ng build --aot -prod",
-	"start": "node server.js"
+	  "start": "node server.js"
   },
   "private": true,
   "dependencies": {
@@ -27,9 +27,8 @@
     "rxjs": "^5.1.0",
     "zone.js": "^0.8.4",
 	  "@angular/cli": "1.0.4",
-    "@angular/compiler-cli": "^4.0.0",
-    "bootstrap-loader": "2.1.0",
-    "jquery-loader": "2.1.1"
+    "@angular/compiler-cli": "^4.0.0"
+    
   },
   "devDependencies": {
     "@types/jasmine": "2.5.38",
