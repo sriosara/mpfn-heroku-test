@@ -1,3 +1,147 @@
-<p>
-  inventariomaterial works!
-</p>
+<!-- Codigo de Jaime -->
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+          <img src="/assets/img/logo.png" style="width: auto; height: 150px">
+        </div>
+        <div class="col-md-10">
+          <h1><p class="text-center">INVENTARIO DE EQUIPOS MULTIMEDIA</p></h1>
+        </div>
+      </div>
+    </div>
+
+    <br><br><br>
+    <div class="container">
+
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">CRITERIOS DE FILTROS</h3>
+        </div>
+        <div class="panel-body">
+          Panel content
+        </div>
+      </div>      
+
+
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">INVENTARIO</h3>
+        </div>
+        <div class="panel-body">
+          Panel content
+        </div>
+
+        <!-- TABLA-->
+        <table class="table table-bordered table-condensed">
+          <thead>
+            <tr>
+              <th *ngFor="let columna of columnasItems">
+                {{columna}}
+              </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let material of materiales">          
+              
+              <div *ngIf="material.estadoInv=='Entregado'; then danger else success"></div>
+
+                <ng-template #danger>
+              <td class="danger">
+                {{material.idItem}}
+              </td>
+              <td class="danger">
+                {{material.nombreItem}}
+              </td>
+              <td class="danger">
+                {{material.tipoItem}}
+              </td>
+              <td class="danger">
+                {{material.estado}}
+              </td>
+              <td class="danger">
+                {{material.estadoInv}}
+              </td>
+                </ng-template>
+                <ng-template #success>
+              <td>
+                {{material.idItem}}
+              </td>
+              <td>
+                {{material.nombreItem}}
+              </td>
+              <td>
+                {{material.tipoItem}}
+              </td>
+              <td>
+                {{material.estado}}
+              </td>
+              <td>
+                {{material.estadoInv}}
+              </td>
+                </ng-template>
+
+
+<!--
+              <div [ngSwitch]="material.estadoInv">
+                <div *ngSwitchCase="Entregado">
+                  <td class="danger">
+                    {{material.idItem}}
+                  </td>
+                  <td class="danger">
+                    {{material.nombreItem}}
+                  </td>
+                  <td class="danger">
+                    {{material.tipoItem}}
+                  </td>
+                  <td class="danger">
+                    {{material.estado}}
+                  </td>
+                  <td class="danger">
+                    {{material.estadoInv}}
+                  </td>
+                </div>
+                <div *ngSwitchCase="Mantenimiento">
+                  <td class="warning">
+                    {{material.idItem}}
+                  </td>
+                  <td class="warning">
+                    {{material.nombreItem}}
+                  </td>
+                  <td class="warning">
+                    {{material.tipoItem}}
+                  </td>
+                  <td class="warning">
+                    {{material.estado}}
+                  </td>
+                  <td class="warning">
+                    {{material.estadoInv}}
+                  </td>
+                </div>
+                <div *ngSwitchDefault>
+                  <td>
+                    {{material.idItem}}
+                  </td>
+                  <td>
+                    {{material.nombreItem}}
+                  </td>
+                  <td>
+                    {{material.tipoItem}}
+                  </td>
+                  <td>
+                    {{material.estado}}
+                  </td>
+                  <td>
+                    {{material.estadoInv}}
+                  </td>
+                </div>
+              </div>
+-->
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>

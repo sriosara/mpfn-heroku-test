@@ -1,23 +1,26 @@
 <!DOCTYPE html>
 
 <html>
-  <head></head>
+  <head>
+
+  </head>
+
   <body>
   <nav class="navbar navbar-inverse">
       <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
-          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+          <!-- <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
             <span class="sr-only">Toggle navigation</span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
-          </button> 
+          </button> -->
           <a class="navbar-brand" href="#">Ministerio Público</a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class=" navbar-collapse collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav">
             <li class="dropdown">
               <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Gestión Bienes Incautados<span class="caret"></span></a>
@@ -27,7 +30,7 @@
                 <li><a routerLink="/registrarretornobien" routerLinkActive="active">Registrar Retorno</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a routerLink="/reportesbi" routerLinkActive="active">Generar Reporte de Bien Incautado</a></li>
-                <li><a href="#">Inventario Materiales</a></li>
+                <li><a routerLink="/inventariobi">Inventario Materiales BI</a></li>
               </ul>
             </li>
             
@@ -39,7 +42,7 @@
                 <li><a routerLink="/registrardevolucion">Registrar Devolución</a></li>
                 <li role="separator" class="divider"></li>
                 <li><a routerLink="/reportesav">Generar Reporte de Audio y Video</a></li>
-                <li><a routerLink="/inventariomaterial">Inventario Materiales Audio Visuales</a></li>
+                <li><a routerLink="/inventariomaterial">Inventario Equipos Multimedia</a></li>
                 <li><a routerLink="/inventarioav">Inventario Materiales AV</a></li>                
               </ul>
             </li>
@@ -56,7 +59,7 @@
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
     </nav>
+
   <router-outlet></router-outlet>
   </body>
 </html>
-

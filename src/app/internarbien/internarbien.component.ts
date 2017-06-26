@@ -420,6 +420,14 @@ export class InternarbienComponent implements OnInit {
     this.datosSerializados = JSON.stringify(this.temporal)
 
   }
+  
+
+
+
+
+
+
+
+
 
 }
-

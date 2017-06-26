@@ -3,8 +3,7 @@ import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { RouterModule, Routes } from '@angular/router';
-//import { ChartsModule } from 'ng2-charts';
-//import {AlertModule} from 'ngx-bootstrap'
+import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
@@ -19,7 +18,7 @@ import { ReportesavComponent } from './reportesav/reportesav.component';
 import { InventariomaterialComponent } from './inventariomaterial/inventariomaterial.component';
 import { InventarioavComponent } from './inventarioav/inventarioav.component';
 import { LoginComponent } from './login/login.component';
-import { ServiciosComponent } from './servicios/servicios.component';
+import { InventariobiComponent } from './inventariobi/inventariobi.component';
 
 
 
@@ -35,7 +34,8 @@ const appRoutes: Routes = [
   { path: 'registrardevolucion', component: RegistrardevolucionComponent },
   { path: 'reportesav', component: ReportesavComponent },
   { path: 'inventariomaterial', component: InventariomaterialComponent },
-  { path: 'inventarioav', component: InventarioavComponent }
+  { path: 'inventarioav', component: InventarioavComponent },
+  { path: 'inventariobi', component: InventariobiComponent }
 ];
 
 @NgModule({
@@ -53,15 +53,14 @@ const appRoutes: Routes = [
     InventariomaterialComponent,
     InventarioavComponent,
     LoginComponent,
-    ServiciosComponent    
+    InventariobiComponent    
   ],
   imports: [
     BrowserModule,
     FormsModule,
     HttpModule,
     RouterModule.forRoot(appRoutes),
-    //AlertModule.forRoot()
-    //ChartsModule
+    ChartsModule
   ],
   providers: [],
   bootstrap: [AppComponent]
@@ -69,3 +68,4 @@ const appRoutes: Routes = [
 export class AppModule { 
   
 }
+
