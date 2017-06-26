@@ -1,3 +1,523 @@
-<p>
-  registraractaentrega works!
-</p>
+<!-- Codigo de Jaime - Registrar Acta de Entrega -->
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+          <img src="/assets/img/logo.png" style="width: auto; height: 150px">
+        </div>
+        <div class="col-md-10">
+          <h1><p class="text-center">REGISTRO DE PRÉSTAMO DE MATERIALES DE AUDIO Y VIDEO</p></h1>
+        </div>
+      </div>
+    </div>
+
+    <br><br><br>
+    <div class="container">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">INFORMACIÓN:</h3>
+        </div>
+        <div class="panel-body">
+
+          <div class="row">
+            <div class="col-md-8">
+              <div class="input-group">
+                <span class="input-group-addon">Documento que autoriza Ingreso</span>
+                <input type="text" class="form-control" placeholder="Oficio" aria-label="Amount (to the nearest dollar)" #oficio value="{{selectedOficio.codigo}}" readonly>
+                <!-- <span class="input-group-addon" data-toggle="modal" data-target="#modalBuscarOficio"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+                </span> -->
+                <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarOficio">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+            <!--las siguientes columnas del grid no se usaran-->
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Fiscalía</span>
+                <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #fiscalia value="{{selectedFiscalia.codigo}}" readonly>
+                <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarFiscalia">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Solicitante</span>
+                <input type="text" class="form-control" placeholder="Fiscal" aria-label="Amount (to the nearest dollar)" #solicitante value="{{selectedFiscal.nombre}}" readonly>
+                <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarFiscal">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Despacho</span>
+                <select #despacho class="form-control" title="Seleccione un despacho">
+                  <option *ngFor="let despacho of selectedFiscalia.despachos">{{despacho}}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Motivo de Préstamo</span>
+                <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2" #motivoPrestamo>
+              </div>
+            </div>            
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Fecha de Devolución</span>
+                <!--podría ser input de fecha y hora-->
+                <input type="datetime-local" #fechaHora name="input" ng-model="example.value" placeholder="yyy-MM-ddTHH" min="2001-01-01" class="form-control" aria-describedby="sizing-addon2" />
+              </div>
+            </div>
+            <!--las siguientes columnas no se usaran-->
+          </div>
+          <br>
+
+          <!-- PARA MOSTRAR DATOS RESGISTRADOS AL MOMENTO <p>datos serial: {{datosSerializados}}</p> -->
+        </div>
+      </div> <!-- div del panel -->
+
+
+
+
+
+      <div class="panel panel-default"> <!-- PANEL DE LA TABLA -->
+        <div class="panel-heading">
+          <h3 class="panel-title">DETALLE DE MATERIALES PARA EL PRESTAMO:</h3>
+        </div>
+        <div class="panel-body">
+        </div> 
+          <table class="table table-hover table-bordered table-condensed">
+            <thead>
+            <tr>
+              <!-- Estas columnas van de la mano con la data agregada a la lista de equipos agregarSelectedMaterial -->
+              <th>Código de Equipo</th>
+              <th>Nombre de Equipo</th>
+              <th>Tipo</th>
+              <th>Estado</th>
+              <th>Descripción</th>
+              <td align="center">
+                <button type="button" class="btn btn-success btn-sm" data-toggle="modal" data-target="#modalBuscarMaterial"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="borrarUltimaFila()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+              </td>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let fila of filas">
+              <td *ngFor="let celda of fila">{{celda}}</td>
+              <td><textarea #descripcion class="form-control" rows="1"></textarea></td>
+              <td align="center"><button (click)="borrarFila(fila)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button></td>
+            </tr>
+            </tbody>
+          </table>
+      </div>   <!-- del panel de la tabla -->   
+      <br><br>
+
+      <!--
+      <p>datos serial: {{datosSerializados}}</p>
+      -->
+      <div class="row">
+        <div class="col-md-1 col-md-offset-5">
+          <button type="button" class="btn btn-primary btn-lg" (click)="insertarDatos(fiscalia.value, despacho.value, delito.value, presuntoAutor.value, agraviados.value, fechaHora.value, oficio.value, carpetaFiscal.value, autorizadoPor.value, cargoAutorizadoPor.value, observaciones.value, entregadoPor.value, cargoEntregadoPor.value, dniEntregadoPor.value, recibidoPor.value, cargoRecibidoPor.value, dniRecibidoPor.value)">Enviar</button>
+        </div>
+
+        <div class="col-md-1">
+          <button type="button" class="btn btn-default btn-lg">Cancelar</button>
+        </div>
+      </div>
+      <br><br>
+    </div><!--container-->
+
+
+
+
+
+
+
+
+<!-- ....................................................MODALS......................................................... -->
+<!-- ................................................................................................................... -->
+
+
+<!-- Modal Fiscalia-->
+<div class="modal fade" id="modalBuscarFiscalia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Fiscalía</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterio de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="input-group">
+              <span class="input-group-addon">Fiscalía</span>
+              <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #fiscaliaBuscar>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione una Fiscalía:</p>
+          </div>
+          <div class="table-responsive">
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>
+                  Codigo
+                </th>
+                <th>
+                  Descripcion
+                </th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let fiscalia of fiscalias; let i = index" (click)="setClickedRowFiscalia(i)" [class.active]="i == selectedRowFiscalia" (click)="setDataFiscalia(fiscalia)">
+                <td>
+                  {{fiscalia.codigo}}
+                </td>
+                <td>
+                  {{fiscalia.descripcion}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+        
+        
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedFiscalia()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- fin modal Buscar Fiscalia -->
+
+
+<!-- Modal Fiscal-->
+<div class="modal fade" id="modalBuscarFiscal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Fiscal</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterios de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">DNI</span>
+                  <input type="text" class="form-control" placeholder="DNI de Fiscal" aria-label="Amount (to the nearest dollar)" #autorizadoPorBuscarDNI>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Nombre</span>
+                  <input type="text" class="form-control" placeholder="Nombre de Fiscal" aria-label="Amount (to the nearest dollar)" #autorizadoPorBuscarNombre>
+                </div>                
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Apellido</span>
+                  <input type="text" class="form-control" placeholder="Apellido de Fiscal" aria-label="Amount (to the nearest dollar)" #autorizadoPorBuscarApellido>
+                </div>                
+              </div>
+            </div><br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione un Fiscal:</p>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    Apellidos y Nombres
+                  </th>
+                  <th>
+                    Cargo
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let fiscal of fiscales; let i = index" (click)="setClickedRowFiscal(i)" [class.active]="i == selectedRowFiscal" (click)="setDataFiscal(fiscal)">
+                  <td>
+                    {{fiscal.nombre}}
+                  </td>
+                  <td>
+                    {{fiscal.cargo}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div> <!-- del div tabla -->
+        </div> <!-- del panel Resultados -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedFiscal()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- Fin modal BuscarFiscal -->
+
+<!-- Modal Oficio-->
+<div class="modal fade" id="modalBuscarOficio" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Oficio</h4>
+      </div>
+      <div class="modal-body">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterios de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Número</span>
+                  <input type="text" class="form-control" placeholder="Número Correlativo del Oficio" aria-label="Amount (to the nearest dollar)" #oficioBuscarNumero>
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Año</span>
+                  <input type="text" class="form-control" placeholder="Año que se generó el Oficio" aria-label="Amount (to the nearest dollar)" #oficioBuscarAnho>
+                </div>                
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Fiscalia</span>
+                  <input type="text" class="form-control" placeholder="Fiscalía de donde proviene el Oficio" aria-label="Amount (to the nearest dollar)" #oficioBuscarFiscalia>
+                </div>                
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Despacho</span>
+                  <input type="text" class="form-control" placeholder="Despacho de donde proviene el Oficio" aria-label="Amount (to the nearest dollar)" #oficioBuscarDespacho>
+                </div>                
+              </div>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione un Oficio: </p>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    Codigo
+                  </th>
+                  <th>
+                    Descripcion
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let oficio of oficios; let i = index" (click)="setClickedRowOficio(i)" [class.active]="i == selectedRowOficio" (click)="setDataOficio(oficio)">
+                  <td>
+                    {{oficio.codigo}}
+                  </td>
+                  <td>
+                    {{oficio.descripcion}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedOficio()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- fin modal BuscarOficio -->
+
+<!-- Modal Materiales-->
+<div class="modal fade" id="modalBuscarMaterial" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Material Multimedia</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterio de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+
+            <div class="row">
+              <div class="col-md-6">
+                <div class="input-group">
+                    <span class="input-group-addon">Código de Material</span>
+                  <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #materialBuscarCodigo>
+                </div>              
+              </div>
+              <div class="col-md-6">
+                <div class="input-group">
+                  <span class="input-group-addon">Tipo de Material</span>
+                  <select #materialBuscarTipo class="form-control" title="Seleccione un Tipo">
+                    <option *ngFor="let tipo of tipoMaterial">{{tipo}}</option>
+                  </select>
+                </div>                
+              </div>
+            </div>
+
+
+            <br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione un Material:</p>
+          </div>
+          <div class="table-responsive">
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>
+                  Código
+                </th>
+                <th>
+                  Nombre
+                </th>
+                <th>
+                  Tipo
+                </th>               
+              </tr>
+            </thead>
+
+            <tbody>
+              <tr *ngFor="let material of materiales; let i = index" (click)="setClickedRowMaterial(i)" [class.active]="i == selectedRowMaterial" (click)="setDataMaterial(material)">
+                <td>
+                  {{material.idItem}}
+                </td>
+                <td>
+                  {{material.nombreItem}}
+                </td>
+                <td>
+                  {{material.tipoItem}}
+                </td>                
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+        
+        
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" (click)="agregarSelectedMaterial()" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedMaterial()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- fin modal Buscar Fiscalia -->

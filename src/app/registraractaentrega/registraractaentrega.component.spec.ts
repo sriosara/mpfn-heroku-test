@@ -23,3 +23,4 @@ describe('RegistraractaentregaComponent', () => {
     expect(component).toBeTruthy();
   });
 });
+

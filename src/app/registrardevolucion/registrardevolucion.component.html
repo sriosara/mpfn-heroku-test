@@ -1,3 +1,274 @@
-<p>
-  registrardevolucion works!
-</p>
+<!-- Codigo de Jaime -->
+    <br>
+    <br>
+    <div class="container">
+      <div class="row">
+        <div class="col-md-2">
+          <img src="/assets/img/logo.png" style="width: auto; height: 150px">
+        </div>
+        <div class="col-md-10">
+          <h1><p class="text-center">REGISTRO DE DEVOLUCIÓN DE MATERIALES DE AUDIO Y VIDEO</p></h1>
+        </div>
+      </div>
+    </div>
+
+    <br><br><br>
+    <div class="container">
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">INFORMACIÓN:</h3>
+        </div>
+        <div class="panel-body">
+
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Código Préstamo</span>
+                <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #codPrestamo value="{{selectedPrestamo.idPrestamo}}" readonly>
+                <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarPrestamo">
+                  <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+                </div>
+              </div>
+            </div>
+            <div class="col-md-6">
+              <p><-----Busque un código de préstamo</p>
+            </div>
+          </div>
+          <br>
+          <!-- todos los demas campos se llenan en base al prestamo seleccionado -->
+          <div class="row">
+            <div class="col-md-8">
+              <div class="input-group">
+                <span class="input-group-addon">Documento que autoriza Ingreso</span>
+                <input type="text" class="form-control" placeholder="Oficio" aria-label="Amount (to the nearest dollar)" #oficio value="{{selectedPrestamo.idOficio}}" readonly>
+              </div>
+            </div>
+            <!--las siguientes columnas del grid no se usaran-->
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Fiscalía</span>
+                <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #fiscalia value="{{selectedPrestamo.idFiscalia}}" readonly> <!-- value="{{selectedFiscalia.codigo}}"-->
+              </div>
+              <br>
+              <div class="input-group">
+                <span class="input-group-addon">Despacho</span>
+                <input type="text" class="form-control" placeholder="Fiscal" aria-label="Amount (to the nearest dollar)" #despacho value="{{selectedPrestamo.despacho}}" readonly> <!--value="{{selectedCarpetaFiscal.codigo}}"-->
+              </div>
+            </div>
+
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Cód Solicitante</span>
+                <input type="text" class="form-control" placeholder="Código de Fiscal" aria-label="Amount (to the nearest dollar)" #solicitante value="{{selectedPrestamo.idFiscal}}" readonly> <!--value="{{selectedCarpetaFiscal.codigo}}"-->
+              </div>
+              <br>
+              <div class="input-group">
+                <span class="input-group-addon">Nombre Solicitante</span>
+                <input type="text" class="form-control" placeholder="Nombre de Fiscal" aria-label="Amount (to the nearest dollar)" #solicitante value="{{selectedPrestamo.nombreFiscal}}" readonly> <!--value="{{selectedCarpetaFiscal.codigo}}"-->
+              </div>
+            </div>
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Motivo de Préstamo</span>
+                <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2" #motivoPrestamo value="{{selectedPrestamo.motivo}}" readonly>
+              </div>
+            </div>            
+          </div>
+          <br>
+          <div class="row">
+            <div class="col-md-6">
+              <div class="input-group">
+                <span class="input-group-addon">Fecha de Devolución</span>
+                <!--podría ser input de fecha y hora-->
+                <input type="text" class="form-control" placeholder="yyy-MM-ddTHH" aria-describedby="sizing-addon2" #fechaHora value="{{selectedPrestamo.fechaDevolucion}}" readonly/>
+              </div>
+            </div>
+            <!--las siguientes columnas no se usaran-->
+          </div>
+          <br>
+
+          <!-- PARA MOSTRAR DATOS RESGISTRADOS AL MOMENTO <p>datos serial: {{datosSerializados}}</p> -->
+        </div>
+      </div> <!-- div del panel -->
+
+
+      <div class="panel panel-default"> <!-- PANEL DE LA TABLA -->
+        <div class="panel-heading">
+          <h3 class="panel-title">DETALLE DE MATERIALES PRESTADOS:</h3>
+        </div>
+        <div class="panel-body">
+        </div> 
+          <table class="table table-hover table-bordered table-condensed">
+            <thead>
+            <tr>
+              <th>Nombre de Equipo</th>
+              <th>Detalle de Préstamo</th>
+              <th>Estado de Préstamo</th>
+              <th>Detalle de Devolución</th>
+              <th>Estado de Devolución</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let fila of selectedDetallePrestamo">
+              <td>{{fila.nombreItem}}</td>
+              <td>{{fila.detallePrestamo}}</td>
+              <td>{{fila.estadoPrestamo}}</td>
+              <td>
+                <textarea class="form-control" rows="1"></textarea> <!-- Falta setear IDs-->
+              </td>
+              <td>
+                <select class="form-control">
+                <option *ngFor="let estado of estados">{{estado}}</option></select>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+      </div>   <!-- del panel de la tabla -->   
+
+      <br>
+      <!--
+      <p>datos serial: {{datosSerializados}}</p>
+      -->
+      <div class="row">
+        <div class="col-md-1 col-md-offset-5">
+          <button type="button" class="btn btn-primary btn-lg" (click)="insertarDatos(fiscalia.value, despacho.value, delito.value, presuntoAutor.value, agraviados.value, fechaHora.value, oficio.value, carpetaFiscal.value, autorizadoPor.value, cargoAutorizadoPor.value, observaciones.value, entregadoPor.value, cargoEntregadoPor.value, dniEntregadoPor.value, recibidoPor.value, cargoRecibidoPor.value, dniRecibidoPor.value)">Enviar</button>
+        </div>
+
+        <div class="col-md-1">
+          <button type="button" class="btn btn-default btn-lg">Cancelar</button>
+        </div>
+      </div>
+      <br><br>
+    </div><!--container-->
+
+
+
+<!-- ....................................................MODALS......................................................... -->
+<!-- ................................................................................................................... -->
+
+<!-- Modal Prestamo-->
+<div class="modal fade" id="modalBuscarPrestamo" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Préstamo</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterio de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Código de Préstamo</span>
+                  <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #prestamoBuscarCodigo>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Solicitante</span>
+                  <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #prestamoBuscarSolicitante>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Motivo de Préstamo</span>
+                  <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #prestamoBuscarMotivo>
+                </div>
+              </div>
+            </div>
+
+
+            <br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <br>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione un Préstamo:</p>
+          </div>
+          <div class="table-responsive">
+          <table class="table table-hover table-bordered">
+            <thead>
+              <tr>
+                <th>
+                  Codigo
+                </th>
+                <th>
+                  Oficio
+                </th>
+                <th>
+                  Fiscalía
+                </th>
+                <th>
+                  Despacho
+                </th>
+                <th>
+                  Fiscal
+                </th>
+                <th>
+                  Fecha Devolución
+                </th>
+              </tr>
+            </thead>
+            <!-- Cargar Cargos de Préstamos -->
+            <tbody>
+              <tr *ngFor="let prestamo of prestamos; let i = index" (click)="setClickedRowPrestamo(i)" [class.active]="i == selectedRowPrestamo" (click)="setDataPrestamo(prestamo)">
+                <td>
+                  {{prestamo.idPrestamo}}
+                </td>
+                <td>
+                  {{prestamo.idOficio}}
+                </td>
+                <td>
+                  {{prestamo.idFiscalia}}
+                </td>
+                <td>
+                  {{prestamo.despacho}}
+                </td>
+                <td>
+                  {{prestamo.idFiscal}}
+                </td>
+                <td>
+                  {{prestamo.fechaDevolucion}}
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        </div>
+        
+        
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedFiscalia()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- fin modal Buscar Prestamo -->
