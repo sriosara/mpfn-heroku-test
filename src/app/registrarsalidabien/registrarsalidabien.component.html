@@ -1,3 +1,611 @@
-<p>
-  registrarsalidabien works!
-</p>
+<!--..........................................Boleta de Traslado de Bienes (Salida)................................. -->
+    <br>
+    <br>
+    <div class="container" >
+      <div class="row">
+        <div class="col-md-2">
+          <img src="/assets/img/logo.png" style="width: auto; height: 150px">
+        </div>
+        <div class="col-md-10">
+          <h1><p class="text-center">BOLETA DE TRASLADO DE BIENES (SALIDA)</p></h1>
+          <h5><p class="text-center">N°</p></h5>
+        </div>
+      </div>
+    </div>
+
+    <br><br><br>
+    <div class="container">
+      <div class="panel panel-default"> 
+      <div class="panel-heading">
+          <h3 class="panel-title">DETALLE DE TRASLADO DE BIENES:</h3>
+      </div>
+      <div class="panel-body">
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-addon">Oficio de traslado</span>
+            <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #oficioTraslado value="{{selectedOficioTraslado.codigo}}" readonly>
+            <!--<span class="input-group-addon" data-toggle="modal" data-target="#modalBuscarOfiTraslado"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </span>-->
+            <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarOfiTraslado">
+              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon2">Carpeta Fiscal</span>
+            <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2" value="{{selectedCarpetaFiscal.codigo}}" readonly>
+            <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarCarpetaFiscal">
+              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon3">Fiscalía</span>
+            <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2" #fiscalia value="{{selectedFiscalia.codigo}}" readonly>
+            <!--<span class="input-group-addon" data-toggle="modal" data-target="#modalBuscarFiscalia"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </span>-->
+            <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarFiscalia">
+              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </div>
+          </div>
+        </div>
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon4">BI</span>
+            <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2" readonly>
+            <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarBI">
+              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon3">Fiscal</span>
+            <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2" #fiscal value="{{selectedFiscal.nombre}}" readonly>
+            <!--<span class="input-group-addon" data-toggle="modal" data-target="#modalBuscarFiscal"> <span class="glyphicon glyphicon-search" aria-hidden="true"></span>
+            </span>-->
+            <div class="input-group-btn" data-toggle="modal" data-target="#modalBuscarFiscal">
+              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon3">Motivo de Salida</span>
+            <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon3">Destino</span>
+            <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2">           
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon3">Delito</span>
+            <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2">
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="row">
+        <div class="col-md-6">
+          <div class="input-group date" id="datetimepicker1" >
+            <span class="input-group-addon" id="sizing-addon3">Fecha y Hora de salida del Bien</span>
+            <input type="datetime-local" id="exampleInput" name="input" ng-model="example.value" placeholder="yyy-MM-ddTHH" min="2001-01-01" class="form-control" aria-describedby="sizing-addon2" required/>
+          </div>
+        </div>
+      </div>
+      </div>
+      </div>
+
+
+<!--...................................Tabla................................................-->     
+
+      <div class="panel panel-default"> <!-- PANEL DE LA TABLA -->
+        <div class="panel-heading">
+          <h3 class="panel-title">DETALLE DE TRASLADO DE BIENES:</h3>
+        </div>
+        <div class="panel-body">
+        </div>
+          <table class="table table-hover table-bordered table-condensed">
+            <thead>
+              <tr>
+                <th *ngFor="let columna of columnas">{{columna}}</th>
+              </tr>
+            </thead>
+
+            <tbody>
+            <tr *ngFor="let fila of filas">
+              <td *ngFor="let celda of fila">{{celda}}</td>
+              <td align="center"><button (click)="borrarFila(fila)" type="button" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-minus" aria-hidden="true"></span></button></td>
+            </tr>
+            <tr>
+              <td>
+                <input #entrada1 class="form-control" maxlength="2" size="1">
+              </td>
+              <td>
+                <input #entrada2 class="form-control" maxlength="2" size="1">
+              </td>
+              <td>
+                <input #entrada3 class="form-control" size="6">
+              </td>
+              <td>
+                <textarea #entrada4 class="form-control" rows="1"></textarea>
+              </td>
+              <td>
+                <select #entrada5 class="form-control">
+                <option *ngFor="let estado of estados">{{estado}}</option></select>
+              </td>
+              <td>
+                <button type="button" class="btn btn-success btn-sm" (click)="insertarFila(entrada1.value, entrada2.value, entrada3.value, entrada4.value, entrada5.value, entrada6.value)"><span class="glyphicon glyphicon-plus" aria-hidden="true"></span></button>
+                <button type="button" class="btn btn-danger btn-sm" (click)="borrarUltimaFila()"><span class="glyphicon glyphicon-remove" aria-hidden="true"></span></button>
+              </td>
+            </tr>
+            </tbody>
+          </table>
+         
+      </div>   <!-- del panel de la tabla -->   
+
+
+
+    
+
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h3 class="panel-title">OBSERVACIONES:</h3>
+        </div>
+        <div class="panel-body">
+          <textarea class="form-control" rows="3" #observaciones></textarea>
+        </div>
+      </div> <!-- del Panel Observaciones --> 
+
+    <div class="panel panel-default">
+      <div class="panel-heading">
+          <h3 class="panel-title">ENTREGADO A: </h3>
+      </div>
+      <div class="panel-body">
+      <div class="row">
+          <div class="col-md-5 ">
+            <div class="input-group">
+              <span class="input-group-addon">Entregado a</span>
+              <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #trabajador value="{{selectedTrabajador.nombre}}" readonly>
+              <div class="input-group-btn" data-toggle="modal" data-target="#modalEntregadoA">
+              <button type="button" class="btn btn-default"><span class="glyphicon glyphicon-search" aria-hidden="true"></span></button>
+            </div>
+            </div>
+          </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-5 ">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon6">Cargo</span>
+            <!--Debería llenarse automaticamente luego de seleccionar un trabajador-->
+            <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2" #cargoTrabajador value="{{selectedTrabajador.cargo}}" readonly>
+          </div>
+        </div>
+      </div>
+      <br>
+
+      <div class="row">
+        <div class="col-md-5 ">
+          <div class="input-group">
+            <span class="input-group-addon" id="sizing-addon6">DNI</span>
+            <!--Debería llenarse automaticamente luego de seleccionar trabajador-->
+            <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2" #dniTrabajador value="{{selectedTrabajador.dni}}" readonly>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div><!--Termino Panel-->
+    
+ <br><br> <!--Termino de plantilla-->
+      
+  <div class="row">
+    <div class="col-md-1 col-md-offset-5">
+      <button type="button" class="btn btn-success">Enviar</button>
+    </div>
+    <div class="col-md-1">
+      <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#cancelmodal">Cancelar</button>
+    </div>
+  </div>
+</div><!--container-->
+<br><br>
+ 
+
+<!-- ....................................................MODALS......................................................... -->
+<!-- ................................................................................................................... -->
+<div class="modal fade" id="cancelmodal" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel">
+  <div class="modal-dialog modal-sm" role="document">
+    <div class="modal-content">
+      <div class="modal-body">
+        <div class="input-group">
+          <span class="input-group-addon" id="sizing-addon2">Cancelar Boleta</span>
+        </div>
+        <br>
+        <br>
+        <h5>¿Esta usted seguro que desea cancelar la boleta de traslado de bienes?</h5>
+        <br>
+        <br>
+        <div class="row">
+          <div class="col-md-2 col-md-offset-1">
+            <button type="button" class="btn btn-success">Si</button>
+          </div>
+          <div class="col-md-2">
+            <button type="button" class="btn btn-danger">Cancelar</button>
+          </div>
+        </div>
+      </div> 
+    </div>
+  </div>
+</div>
+
+  <!-- Modal Oficio de Traslado-->
+    <div class="modal fade" id="modalBuscarOfiTraslado" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Oficio de Traslado</h4>
+          </div>
+          <div class="modal-body">
+            <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon2">Buscar Oficio</span>
+              <input type="text" class="form-control" placeholder="" aria-describedby="sizing-addon2">
+            </div>
+            <br>
+            <br>
+            <h5>Seleccione un Oficio de Traslado</h5>
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>Codigo</th>
+                    <th>Numero de Oficio</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let oficio of oficiosTraslado; let i = index" (click)="setClickedRowOficioTraslado(i)" [class.active]="i == selectedRowOficioTraslado" (click)="setDataOficioTraslado(oficio)">
+                    <td>{{oficio.codigo}}</td>
+                    <td>{{oficio.numOficio}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br><p>selected data {{selectedOficioTraslado.codigo}}</p>
+            </div>
+          </div>          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+            <button type="button" class="btn btn-default" (click)="borrarSelectedTrabajadorEntregado()" data-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+     <!-- Modal Fiscalia-->
+    <div class="modal fade" id="modalBuscarFiscalia" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Fiscalia</h4>
+          </div>
+          <div class="modal-body">
+            <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon2">Buscar Fiscalia</span>
+              <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2">
+            </div>
+            <br>
+            <br>
+            <h5>Seleccione una Fiscalía</h5>
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>Codigo</th>
+                    <th>Descripcion</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let fiscalia of fiscalias; let i = index" (click)="setClickedRowFiscalia(i)" [class.active]="i == selectedRowFiscalia" (click)="setDataFiscalia(fiscalia)">
+                    <td>{{fiscalia.codigo}}</td>
+                    <td>{{fiscalia.descripcion}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br><p>selected data {{selectedFiscalia.codigo}}</p>
+            </div>
+          </div>          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+            <button type="button" class="btn btn-default" (click)="borrarSelectedTrabajadorEntregado()" data-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+ 
+<!-- Modal Fiscal-->
+<div class="modal fade" id="modalBuscarFiscal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Fiscal</h4>
+      </div>
+      <div class="modal-body">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterios de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">DNI</span>
+                  <input type="text" class="form-control" placeholder="DNI de Fiscal" aria-label="Amount (to the nearest dollar)" #fiscalBuscarDNI>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Nombre</span>
+                  <input type="text" class="form-control" placeholder="Nombre de Fiscal" aria-label="Amount (to the nearest dollar)" #fiscalBuscarNombre>
+                </div>                
+              </div>
+              <div class="col-md-4">
+                <div class="input-group">
+                  <span class="input-group-addon">Apellido</span>
+                  <input type="text" class="form-control" placeholder="Apellido de Fiscal" aria-label="Amount (to the nearest dollar)" #fiscalBuscarApellido>
+                </div>                
+              </div>
+            </div><br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <br>
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione un Fiscal:</p>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    Apellidos y Nombres
+                  </th>
+                  <th>
+                    Cargo
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let fiscal of fiscales; let i = index" (click)="setClickedRowFiscal(i)" [class.active]="i == selectedRowFiscal" (click)="setDataFiscal(fiscal)">
+                  <td>
+                    {{fiscal.nombre}}
+                  </td>
+                  <td>
+                    {{fiscal.cargo}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div> <!-- del div tabla -->
+        </div> <!-- del panel Resultados -->
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedFiscal()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+    <!-- Modal BI-->
+    <div class="modal fade" id="modalBuscarBI" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Boleta de Internamiento</h4>
+          </div>
+          <div class="modal-body">
+            <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon2">Buscar Boleta de Internamiento</span>
+              <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2">
+            </div>
+            <br>
+            <br>
+             <h5>Seleccione una Boleta de Internamiento</h5>
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Cargo</th>
+                    <th>DNI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let trabajador of trabajadores; let i = index" (click)="setClickRowTrabajador(i)" [class.active]="i == setClickRowTrabajador" (click)="setDataTrabajador(trabajador)">
+                    <td>{{trabajador.nombre}}</td>
+                    <td>{{trabajador.cargo}}</td>
+                    <td>{{trabajador.dni}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br><p>selected data {{selectedTrabajador.nombre}}</p>
+            </div>
+          </div>          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+            <button type="button" class="btn btn-default" (click)="borrarSelectedTrabajadorEntregado()" data-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal Entregado A-->
+    <div class="modal fade" id="modalEntregadoA" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel">Trabajador</h4>
+          </div>
+          <div class="modal-body">
+            <div class="input-group">
+              <span class="input-group-addon" id="sizing-addon2">Buscar Oficio</span>
+              <input type="text" class="form-control" placeholder="-" aria-describedby="sizing-addon2">
+            </div>
+            <br>
+            <br>
+             <h5>Seleccione a un Fiscal</h5>
+            <div class="table-responsive">
+              <table class="table table-hover table-bordered">
+                <thead>
+                  <tr>
+                    <th>Nombre</th>
+                    <th>Cargo</th>
+                    <th>DNI</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr *ngFor="let trabajador of trabajadores; let i = index" (click)="setClickedRowTrabajador(i)" [class.active]="i == setClickedRowTrabajador" (click)="setDataTrabajador(trabajador)">
+                    <td>{{trabajador.nombre}}</td>
+                    <td>{{trabajador.cargo}}</td>
+                    <td>{{trabajador.dni}}</td>
+                  </tr>
+                </tbody>
+              </table>
+              <br><p>selected data {{selectedTrabajador.nombre}}</p>
+            </div>
+          </div>          
+          <div class="modal-footer">
+            <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+            <button type="button" class="btn btn-default" (click)="borrarSelectedTrabajadorEntregado()" data-dismiss="modal">Cancelar</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+<!-- Modal Carpeta Fiscal-->
+<div class="modal fade" id="modalBuscarCarpetaFiscal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+  <div class="modal-dialog modal-lg" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="myModalLabel">Buscar Carpeta Fiscal</h4>
+      </div>
+      <div class="modal-body">
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Criterios de Búsqueda</h3>
+          </div>
+          <div class="panel-body">
+            <div class="input-group">
+              <span class="input-group-addon">Carpeta Fiscal</span>
+              <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #carpetaFiscalBuscarNombre>
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon">Delito</span>
+              <input type="text" class="form-control" placeholder="-" aria-label="Amount (to the nearest dollar)" #carpetaFiscalBuscarDelito>
+            </div>
+            <br>
+            <div class="input-group">
+              <span class="input-group-addon">Estado de Proceso</span>
+              <input type="text" class="form-control" placeholder="- En bd puede tener en qué estado de proceso está" aria-label="Amount (to the nearest dollar)" #carpetaFiscalBuscarDelito>
+            </div>
+            <br>
+            <div class="row">
+              <div class="col-md-1 col-md-offset-5">
+                <button type="button" class="btn btn-primary" >Buscar</button>
+              </div>
+              <div class="col-md-1">
+                <button type="button" class="btn btn-default" >Limpiar</button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h3 class="panel-title">Resultado</h3>
+          </div>
+          <div class="panel-body">
+            <p>Seleccione una Carpeta Fiscal</p>
+          </div>
+          <div class="table-responsive">
+            <table class="table table-hover table-bordered">
+              <thead>
+                <tr>
+                  <th>
+                    Codigo
+                  </th>
+                  <th>
+                    Descripcion
+                  </th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr *ngFor="let carpetaFiscal of carpetasFiscales; let i = index" (click)="setClickedRowCarpetaFiscal(i)" [class.active]="i == selectedRowCarpetaFiscal" (click)="setDataCarpetaFiscal(carpetaFiscal)">
+                  <td>
+                    {{carpetaFiscal.codigo}}
+                  </td>
+                  <td>
+                    {{carpetaFiscal.descripcion}}
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-primary" data-dismiss="modal">Aceptar</button>
+        <button type="button" class="btn btn-default" (click)="borrarSelectedCarpetaFiscal()" data-dismiss="modal">Cancelar</button>
+      </div>
+    </div>
+  </div>
+</div> <!-- Del modal carpeta Fiscal -->
