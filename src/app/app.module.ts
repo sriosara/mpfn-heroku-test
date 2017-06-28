@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { ChartsModule } from 'ng2-charts';
 
 import { AppComponent } from './app.component';
+
 import { HomeComponent } from './home/home.component';
 import { InternarbienComponent } from './internarbien/internarbien.component';
 import { RegistrarsalidabienComponent } from './registrarsalidabien/registrarsalidabien.component';

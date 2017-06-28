@@ -1,9 +1,4 @@
 <script src="node_modules/chart.js/src/chart.js"></script>
-<script type="text/javascript">
-  $(function () {
-  $('#datetimepicker1').datetimepicker();
-  });
-</script>
 <!-- Codigo de Jaime -->
 <br>
 <br>
@@ -32,37 +27,60 @@
         </div>
         <div class="col-md-4">
           <select #entrada2 class="form-control" title="Seleccione un Criterio">
-            <option *ngFor="let criterio2 of criterios2">{{criterio2.nombrecriterio1}}</option>
+            <option *ngFor="let criterio2 of criterios2">{{criterio2.nombrecriterio2}}</option>
           </select>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon">Desde</span>
+            <!--podría ser input de fecha y hora-->
+            <input type="date" #fechaHoraDesde name="input" ng-model="example.value" placeholder="yyy-MM-ddTHH" min="2001-01-01" class="form-control" aria-describedby="sizing-addon2" />
+          </div>
+          <br>
+          <div class="input-group">
+            <span class="input-group-addon">Hasta</span>
+            <!--podría ser input de fecha y hora-->
+            <input type="date" #fechaHoraHasta name="input" ng-model="example.value" placeholder="yyy-MM-ddTHH" min="2001-01-01" class="form-control" aria-describedby="sizing-addon2" />
+          </div>
+
+
         </div>
         <div class="col-md-4">
         </div>
-      </div> 
+      </div> <!-- De la primera FILA -->
       <br>
       <div class="row">
         <div class="col-md-4">
 
-            <div class="form-group">
-                <div class='input-group date' id='datetimepicker1'>
-                    <input type='text' class="form-control" />
-                    <span class="input-group-addon">
-                        <span class="glyphicon glyphicon-calendar"></span>
-                    </span>
-                </div>
-            </div>
+        </div>
+        <div class="col-md-4">
 
         </div>
         <div class="col-md-4">
 
-              <div class="input-group">
-                <span class="input-group-addon">Hasta</span>
-                <!--podría ser input de fecha y hora-->
-                <input type="datetime-local" #fechaHora name="input" ng-model="example.value" placeholder="yyy-MM-ddTHH" min="2001-01-01" class="form-control" aria-describedby="sizing-addon2" />
-              </div>
+        </div>
+      </div>
 
+      <br>
+      <p>Criterio Seleccionado: {{criterioSeleccionado}}, Fecha desde: {{fechaDesde}}, Fecha Hasta: {{fechaHasta}}, </p>
+
+      <!--<p>{{newDate2 | date: 'dd'}}/{{newDate2 | date:'MM'}}/{{newDate2 | date: 'yyyy'}}</p>-->
+      <p>new date 2: {{newDate2}}</p>
+      <p>fechaDesdeDesagregada: {{fechaDesdeDesagregada}}</p>      
+      <p>diferencia de años = {{difAno}}</p>
+        <ul>
+          <li *ngFor="let label of labels">{{label}}</li>
+          <li *ngFor="let fechaDesdeDes of fechaDesdeDesagregada">{{fechaDesdeDes}}</li>
+
+          <li *ngFor="let lineChartLabel2 of lineChartLabels2">{{lineChartLabel2}}</li>
+        </ul>              
+      <br>
+      <div class="row">
+        <div class="col-md-1 col-md-offset-5">
+          <button type="button" class="btn btn-primary btn-lg" (click)="buscarDatos(entrada1.value, entrada2.value, fechaHoraDesde.value, fechaHoraHasta.value)">Enviar</button>
         </div>
-        <div class="col-md-4">
-        </div>
+        <div class="col-md-1">
+          <button type="button" class="btn btn-default btn-lg">Cancelar</button>
+        </div>        
       </div>      
     </div>
   </div>
@@ -80,8 +98,8 @@
         <div class="col-md-5 col-md-offset-1">
           <div style="display: block;">
           <canvas baseChart width="400" height="400"
-                      [datasets]="lineChartData"
-                      [labels]="lineChartLabels"
+                      [datasets]="lineChartData2"
+                      [labels]="lineChartLabels2"
                       [options]="lineChartOptions"
                       [colors]="lineChartColors"
                       [legend]="lineChartLegend"
@@ -93,10 +111,10 @@
         <div class="col-md-5"> <!--  style="margin-bottom: 10px" -->
           <table class="table table-responsive">
             <tr>
-              <th *ngFor="let label of lineChartLabels">{{label}}</th>
+              <th *ngFor="let label of lineChartLabels2">{{label}}</th>
             </tr>
-            <tr *ngFor="let d of lineChartData">
-              <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
+            <tr *ngFor="let d of lineChartData2">
+              <td *ngFor="let label of lineChartLabels2; let j=index">{{d && d.data[j]}}</td>
             </tr>
           </table>
           <button (click)="randomize()">CLICK</button>

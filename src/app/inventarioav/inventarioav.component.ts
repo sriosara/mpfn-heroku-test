@@ -7,9 +7,12 @@ import { Component, OnInit } from '@angular/core';
 })
 export class InventarioavComponent implements OnInit {
 
-  constructor() { }
+  public constructor() {
 
-  ngOnInit() {
+  }
+
+  public ngOnInit():void {
+
   }
 
 }
