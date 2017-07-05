@@ -99,10 +99,6 @@ export class ReportesavComponent implements OnInit {
   ]
 
 
-  criterioSeleccionado="Sin Elegir"
-  fiscalesLabel = []
-  fiscaliasLabel = []
-  archivosLabel = []
   labels = []
   periodos = []
   fechaDesde = ""
@@ -121,16 +117,14 @@ export class ReportesavComponent implements OnInit {
   mesDesde : number
   anoHasta : number
   mesHasta : number
-  difAno = 0
+
   temp : [number]
   tempCont = 0
   public lineChartData2:Array<any> = []
   public lineChartLabels2:Array<any> = []
   buscarDatos = function(e1 : any, e2 : any, e3 : any, e4 : any){
-    this.criterioSeleccionado=e1
-    this.fiscalesLabel = []
-    this.fiscaliasLabel = []
-    this.archivosLabel = []
+    //this.lineChartData2 = []
+    //this.lineChartLabels2 = []
     this.labels = []
     this.fechaDesde = e3
     this.fechaHasta = e4
@@ -148,7 +142,6 @@ export class ReportesavComponent implements OnInit {
     this.mesDesde = Number(this.fechaDesdeDesagregada[1])
     this.anoHasta = Number(this.fechaHastaDesagregada[0])
     this.mesHasta = Number(this.fechaHastaDesagregada[1])   
-    this.difAno = this.anoHasta - this.anoDesde
 
     //cuando es por años.
     for (var j = this.anoDesde; j <= this.anoHasta; j++){
@@ -187,7 +180,7 @@ export class ReportesavComponent implements OnInit {
     }
 
 
-
+/*
     for (var i=0; i < this.labels.length; i++){
       this.temp = []
       for (var k=0; k < this.periodos.length; k++){
@@ -204,6 +197,17 @@ export class ReportesavComponent implements OnInit {
         }
       )
     }
+*/
+
+
+    for (let i=0; i < this.labels.length; i++){
+      this.lineChartData2[i] = {data: new Array(this.lineChartLabels2.length), label: this.labels[i]};
+      for (let k=0; k < this.lineChartLabels2.length; k++){
+        this.lineChartData2[i].data[k] = Math.floor((Math.random() * 100) + 1);
+      }
+
+    }
+
 
 
   }

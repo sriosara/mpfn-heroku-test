@@ -59,20 +59,7 @@
 
         </div>
       </div>
-
-      <br>
-      <p>Criterio Seleccionado: {{criterioSeleccionado}}, Fecha desde: {{fechaDesde}}, Fecha Hasta: {{fechaHasta}}, </p>
-
-      <!--<p>{{newDate2 | date: 'dd'}}/{{newDate2 | date:'MM'}}/{{newDate2 | date: 'yyyy'}}</p>-->
-      <p>new date 2: {{newDate2}}</p>
-      <p>fechaDesdeDesagregada: {{fechaDesdeDesagregada}}</p>      
-      <p>diferencia de años = {{difAno}}</p>
-        <ul>
-          <li *ngFor="let label of labels">{{label}}</li>
-          <li *ngFor="let fechaDesdeDes of fechaDesdeDesagregada">{{fechaDesdeDes}}</li>
-
-          <li *ngFor="let lineChartLabel2 of lineChartLabels2">{{lineChartLabel2}}</li>
-        </ul>              
+           
       <br>
       <div class="row">
         <div class="col-md-1 col-md-offset-5">
@@ -82,13 +69,11 @@
           <button type="button" class="btn btn-default btn-lg">Cancelar</button>
         </div>        
       </div>      
-    </div>
-  </div>
-</div>
+    </div> <!-- del body del panel de criterios-->
+  </div> <!-- del panel de criterios -->
 
 
-<div class="container">
-  <div class="panel panel-default">
+   <div class="panel panel-default">
     <div class="panel-heading">
       <h3 class="panel-title">RESULTADO</h3>
     </div>
@@ -98,8 +83,8 @@
         <div class="col-md-5 col-md-offset-1">
           <div style="display: block;">
           <canvas baseChart width="400" height="400"
-                      [datasets]="lineChartData2"
-                      [labels]="lineChartLabels2"
+                      [datasets]="lineChartData"
+                      [labels]="lineChartLabels"
                       [options]="lineChartOptions"
                       [colors]="lineChartColors"
                       [legend]="lineChartLegend"
@@ -109,20 +94,21 @@
           </div>
         </div>
         <div class="col-md-5"> <!--  style="margin-bottom: 10px" -->
-          <table class="table table-responsive">
+          <table class="table table-responsive"> 
             <tr>
-              <th *ngFor="let label of lineChartLabels2">{{label}}</th>
+              <th *ngFor="let label of lineChartLabels">{{label}}</th>
             </tr>
-            <tr *ngFor="let d of lineChartData2">
-              <td *ngFor="let label of lineChartLabels2; let j=index">{{d && d.data[j]}}</td>
+            <tr *ngFor="let d of lineChartData">
+              <td *ngFor="let label of lineChartLabels; let j=index">{{d && d.data[j]}}</td>
             </tr>
           </table>
-          <button (click)="randomize()">CLICK</button>
+          <!--<button (click)="randomize()">CLICK</button>-->
         </div>
       </div>
 
     </div>
-  </div>
+  </div> 
+
 </div>
 
 

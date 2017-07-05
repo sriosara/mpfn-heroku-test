@@ -46,15 +46,46 @@
                 <li><a routerLink="/inventarioav">Inventario Materiales AV</a></li>                
               </ul>
             </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-bell" aria-hidden="true"></span><span class="caret"></span></a>           
+              <ul class="dropdown-menu">
+                <li><a routerLink="/"><span class="glyphicon glyphicon-align-left" aria-hidden="true"></span>Solicitud de Transcripción<span class="badge">13</span></a></li>
+                <li><a routerLink="/"><span class="glyphicon glyphicon-arrow-right" aria-hidden="true"></span>Solicitud de Entrega<span class="badge">3</span></a></li>
+                <li><a routerLink="/"><span class="glyphicon glyphicon-arrow-left" aria-hidden="true"></span>Solicitud de Devolución<span class="badge">1</span></a></li>
+              </ul>
+
+            </li>
+
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-user" aria-hidden="true"></span><span class="caret"></span></a>           
+              <ul class="dropdown-menu">
+                <li><a routerLink="/"><span class="glyphicon glyphicon-cog" aria-hidden="true"></span>Configurar Cuenta</a></li>
+                <li role="separator" class="divider"></li>
+                <li><a routerLink="/"><span class="glyphicon glyphicon-log-out" aria-hidden="true"></span>Cerrar Sesión</a></li>
+              </ul>
+            </li>
+
+
+
           </ul>
           <!--  class="navbar-img navbar-right"-->
           <!-- <p class="navbar-text navbar-right">Signed in as <a href="#" class="navbar-link">Mark Otto</a></p> -->
+<!--
           <div class="nav navbar-right">
             <img class="navbar-right" src="/assets/img/img3.png" style="width: auto; height: 35px; margin-top: 5px; margin-left: 5px; margin-right: 1px" >
             <p class="navbar-text navbar-right">Bienvenid@ {{usuarioSesion}} </p> 
-
           </div>          
-          
+-->
+          <ul class="nav navbar-top-links navbar-right">
+
+
+            <li>
+              <img class="navbar-right" src="/assets/img/img3.png" style="width: auto; height: 35px; margin-top: 5px; margin-left: 5px; margin-right: 1px" >
+              <p class="navbar-text navbar-right">Bienvenid@ {{usuarioSesion}} </p> 
+            </li>
+
+          </ul>           
           
         </div><!-- /.navbar-collapse -->
       </div><!-- /.container-fluid -->
